@@ -299,8 +299,10 @@ class ConsensusEngine:
                 finalized block, in height order, after the engine's own state
                 has been updated.
             logger: ``logger(event, **fields)`` records one event. The engine
-                always passes ``height`` and ``round`` (and ``node``); the logger
-                adds timestamps if it wants them.
+                always passes ``height`` and ``round`` but never ``node``: the
+                logger is created per node and writes the node id itself, so
+                ``EventLogger(node_id, ...).event`` can be passed directly. The
+                logger adds timestamps if it wants them.
             user_keys: Optional ``sender -> public key`` map forwarded to
                 ``validate_block`` to check transaction signatures. ``None``
                 means node.py already checked them before the mempool.
@@ -829,12 +831,15 @@ class ConsensusEngine:
             self._timeout_handle = None
 
     def _log(self, event: str, **fields: Any) -> None:
-        """Send one event to the injected logger with node id, height and round attached.
+        """Send one event to the injected logger with height and round attached.
+
+        The node id is not sent: the logger belongs to one node and adds it
+        itself. ``EventLogger.event`` rejects a ``node`` field as a reserved key.
 
         Args:
             event: Event type, for example ``"prevote"`` or ``"finalize"``.
             **fields: Extra event fields. They must not be named ``node``,
-                ``height`` or ``round``; message heights use names such as
-                ``msg_height`` or ``vote_height`` instead.
+                ``height``, ``round``, ``time`` or ``event``; message heights use
+                names such as ``msg_height`` or ``vote_height`` instead.
         """
-        self._logger(event, node=self.node_id, height=self.height, round=self.round, **fields)
+        self._logger(event, height=self.height, round=self.round, **fields)

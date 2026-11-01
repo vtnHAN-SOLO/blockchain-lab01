@@ -7,6 +7,7 @@ from l1sim.consensus.engine import ConsensusEngine, Step, TimeoutConfig, propose
 from l1sim.crypto import verify
 from l1sim.encoding import block_hash
 from l1sim.execution import Mempool, State
+from l1sim.logger import EventLogger
 from l1sim.models import GENESIS_HASH, Domain, Kind, Message, Phase
 from tests.unit.consensus_harness import TIMEOUTS, Network, sample_txs
 
@@ -337,3 +338,39 @@ def test_engine_rejects_node_outside_validator_set():
             on_finalize=lambda block, certificate: None,
             logger=lambda event, **fields: None,
         )
+
+
+def test_engine_never_sends_node_to_the_logger():
+    net = Network(4, txs=sample_txs())
+    net.start()
+
+    assert net.run_until_height(2)
+    for node, events in net.events.items():
+        assert events, node
+        assert all("node" not in fields for _, fields in events)
+
+
+def test_engine_logs_through_event_logger(tmp_path):
+    net = Network(4)
+    event_logger = EventLogger("V1", "engine_logger", tmp_path)
+    engine = ConsensusEngine(
+        node_id="V1",
+        keypair=net.keys["V1"],
+        validator_keys={node: pair.public_key for node, pair in net.keys.items()},
+        timeouts=TIMEOUTS,
+        state=State(),
+        mempool=Mempool(),
+        max_txs_per_block=1,
+        broadcast=lambda message: None,
+        schedule_timeout=lambda *args: None,
+        cancel_timeout=lambda handle: None,
+        on_finalize=lambda block, certificate: None,
+        logger=event_logger.event,
+    )
+
+    engine.start()
+
+    records = [json.loads(line) for line in event_logger.path.read_text().splitlines()]
+    assert [record["event"] for record in records][:3] == ["new_round", "propose", "prevote"]
+    assert all(record["node"] == "V1" for record in records)
+    assert all(record["height"] == 1 and record["round"] == 0 for record in records)
