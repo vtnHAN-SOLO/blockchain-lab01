@@ -1,0 +1,16 @@
+{
+  "chain_id": "lab01",
+  "seed": 42,
+  "validators": [
+    {"id": "V0", "public_key": "1d8dcc90826a5bd9051b1463c92cfcf31afd11a04b24afa1a28fdc66323eb299"},
+    {"id": "V1", "public_key": "bf2ab89b4a717fa198df81a53528b2aafea539d8814fdff05ab2ddd5fe0a19e1"},
+    {"id": "V2", "public_key": "c7e7b17e34259a441d356f7345ae07c0d54add883c4e01fa2cf66b50e4dbcb26"},
+    {"id": "V3", "public_key": "b3eabd84b50fa80a45032df77f8b830054fa82be618b07e75aeb693c4d32f9bc"},
+    {"id": "V4", "public_key": "83fcf305464e7624971a1cc62890b8e163f875b14810c07a80c7e315352f3553"},
+    {"id": "V5", "public_key": "e360ac62f0eec257229550103264ab0d8ae682fa9ab406d7d59dda1fea42ab86"},
+    {"id": "V6", "public_key": "51ef5c24f00cd65a5fb38d47bc50968012bc9092d10789ac77beb0b17aa116ad"},
+    {"id": "V7", "public_key": "cd949f365337b21538ab34f59031e9a25aa6e992a5c7999fe381e73224c537f7"},
+    {"id": "V8", "public_key": "f0b137a73c74ae66d7987a9975dc6a8757a888b586257aa9208e02a64518f4d8"},
+    {"id": "V9", "public_key": "e70f4a859ddd6b018b4247a64af02c995ce8f49e4190d2ba32340111ab97449c"}
+  ]
+}

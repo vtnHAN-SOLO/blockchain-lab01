@@ -1,14 +1,16 @@
 {
-  "chain_id": "lab01-devnet",
+  "name": "default",
+  "chain_id": "lab01",
   "seed": 42,
-  "num_validators": 8,
-  "byzantine": 0,
+  "num_validators": 10,
+  "validators": ["V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9"],
+  "byzantine": [],
   "network": {
     "min_delay_ms": 10,
     "max_delay_ms": 200,
     "drop_rate": 0.0,
     "duplicate_rate": 0.0,
-    "gst_ms": 0,
+    "gst_height": 0,
     "delta_ms": 500
   },
   "consensus": {

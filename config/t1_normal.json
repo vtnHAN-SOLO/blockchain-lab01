@@ -1,0 +1,54 @@
+{
+  "name": "t1_normal",
+  "chain_id": "lab01",
+  "seed": 42,
+  "num_validators": 10,
+  "validators": ["V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9"],
+  "byzantine": [],
+  "max_height": 5,
+  "warmup_ms": 1000,
+  "max_txs_per_block": 4,
+  "network": {
+    "min_delay_ms": 10,
+    "max_delay_ms": 200,
+    "drop_rate": 0.0,
+    "duplicate_rate": 0.0,
+    "gst_height": 0,
+    "delta_ms": 500,
+    "target_degree": 4
+  },
+  "discovery": {
+    "multicast_group": "239.1.1.1",
+    "multicast_port": 50000,
+    "beacon_interval_ms": 1000,
+    "target_degree": 4
+  },
+  "consensus": {
+    "timeout_propose_ms": 1000,
+    "timeout_prevote_ms": 1000,
+    "timeout_precommit_ms": 1000,
+    "timeout_delta_ms": 300
+  },
+  "transactions": [
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-01", "nonce": 0},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-02", "nonce": 0},
+    {"sender": "Charlie", "key": "Charlie/account", "value": "hello-03", "nonce": 0},
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-04", "nonce": 1},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-05", "nonce": 1},
+    {"sender": "Charlie", "key": "Charlie/account", "value": "hello-06", "nonce": 1},
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-07", "nonce": 2},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-08", "nonce": 2},
+    {"sender": "Charlie", "key": "Charlie/account", "value": "hello-09", "nonce": 2},
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-10", "nonce": 3},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-11", "nonce": 3},
+    {"sender": "Charlie", "key": "Charlie/account", "value": "hello-12", "nonce": 3},
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-13", "nonce": 4},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-14", "nonce": 4},
+    {"sender": "Charlie", "key": "Charlie/account", "value": "hello-15", "nonce": 4},
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-16", "nonce": 5},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-17", "nonce": 5},
+    {"sender": "Charlie", "key": "Charlie/account", "value": "hello-18", "nonce": 5},
+    {"sender": "Alice", "key": "Alice/account", "value": "hello-19", "nonce": 6},
+    {"sender": "Bob", "key": "Bob/account", "value": "hello-20", "nonce": 6}
+  ]
+}
